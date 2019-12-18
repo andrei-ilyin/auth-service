@@ -1,3 +1,6 @@
 .idea/
 cmake-build-debug/
 cmake-build-release/
+*.o
+auth_server
+auth_client

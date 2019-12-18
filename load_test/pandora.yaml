@@ -1,0 +1,30 @@
+pools:
+  - gun:
+      type: grpc_gun # gun name at `register.Gun("my_custom_gun_name", ...`)
+      target: "127.0.0.1:50051"
+
+    ammo:
+      type: custom_provider
+      source: # You may just write file path here. Or stdin.
+        type: file
+        path: ./ammo.txt
+        
+    result:
+      type: phout
+      destination: ./phout.log
+
+    rps:
+      - {duration: 30s, type: line,  from: 1, to: 20000}
+      
+    startup:
+      type: once
+      times: 10
+
+log:
+  level: info
+
+monitoring:
+  cpuprofile:
+    enabled: true
+  memprofile:
+    enabled: true

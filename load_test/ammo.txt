@@ -1,0 +1,4 @@
+{"tag": "/login", "Param1": "root", "Param2": "Pass_w0rd"}
+{"tag": "/login", "Param1": "root", "Param2": "invalid_password"}
+{"tag": "/login", "Param1": "vasya_pupkin", "Param2": "Pass_w0rd"}
+{"tag": "/login", "Param1": "vasya_pupkin", "Param2": "invalid_password"}

@@ -18,8 +18,8 @@ class AuthenticatorServiceImpl final : public auth::Authenticator::Service {
     const std::string& username = request->credentials().user_name();
     const std::string& password = request->credentials().password();
 
-    std::cout << "Login attempt with login " << username << " and password "
-              << password << std::endl;
+    // std::cout << "Login attempt with login " << username << " and password "
+    //           << password << std::endl;
 
     if (username != "root" || password != "Pass_w0rd") {
       response->mutable_status()->set_code(auth::Status_Code_ACCESS_DENIED);

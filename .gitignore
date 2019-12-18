@@ -4,3 +4,5 @@ cmake-build-release/
 *.o
 auth_server
 auth_client
+*.log
+load_test/grpc_gun

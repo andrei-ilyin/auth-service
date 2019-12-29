@@ -1,4 +1,10 @@
-{"tag": "/login", "Param1": "root", "Param2": "Pass_w0rd"}
-{"tag": "/login", "Param1": "root", "Param2": "invalid_password"}
-{"tag": "/login", "Param1": "vasya_pupkin", "Param2": "Pass_w0rd"}
-{"tag": "/login", "Param1": "vasya_pupkin", "Param2": "invalid_password"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "invalid_password"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,private"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,private,secret"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "dfdsfdsf,public,sdfassad,123456789"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,private,secret,public,qwetyuiop"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,public,secret,12312,qwetyuiop,asdfghjkl"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,private,secret,123456789,qwetyuiop,asdfghjkl,zxcvbnmt"}
+{"tag": "no_queries", "Param1": "admin", "Param2": "1111111", "Param3": "public,private,secret,public,qwetyuiop,asdfghjkl,zxcvbnm,1pqowieuryt"}

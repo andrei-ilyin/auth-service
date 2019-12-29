@@ -1,0 +1,28 @@
+autostop:
+  autostop: []
+  enabled: true
+  package: yandextank.plugins.Autostop
+
+phantom:
+  enabled: false
+  package: yandextank.plugins.Phantom
+
+pandora:
+  enabled: true
+  package: yandextank.plugins.Pandora
+  pandora_cmd: ./grpc_gun
+  config_file: ./pandora.yaml
+
+console:
+  enabled: true
+  package: yandextank.plugins.Console
+
+telegraf:
+  enabled: true
+  package: yandextank.plugins.Telegraf
+
+uploader:
+  enabled: false
+  package: yandextank.plugins.DataUploader
+  api_address: https://overload.yandex.net/
+  token_file: ./token.txt

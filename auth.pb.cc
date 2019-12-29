@@ -219,7 +219,6 @@ const ::google::protobuf::uint32 TableStruct_auth_2eproto::offsets[] PROTOBUF_SE
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::auth::Cookie, session_id_),
-  PROTOBUF_FIELD_OFFSET(::auth::Cookie, hash_key_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::auth::Status, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -267,13 +266,13 @@ const ::google::protobuf::uint32 TableStruct_auth_2eproto::offsets[] PROTOBUF_SE
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::auth::Credentials)},
   { 7, -1, sizeof(::auth::Cookie)},
-  { 14, -1, sizeof(::auth::Status)},
-  { 20, -1, sizeof(::auth::LoginRequest)},
-  { 26, -1, sizeof(::auth::LoginResponse)},
-  { 33, -1, sizeof(::auth::LogoutRequest)},
-  { 39, -1, sizeof(::auth::LogoutResponse)},
-  { 44, -1, sizeof(::auth::ValidationRequest)},
-  { 51, -1, sizeof(::auth::ValidationResponse)},
+  { 13, -1, sizeof(::auth::Status)},
+  { 19, -1, sizeof(::auth::LoginRequest)},
+  { 25, -1, sizeof(::auth::LoginResponse)},
+  { 32, -1, sizeof(::auth::LogoutRequest)},
+  { 38, -1, sizeof(::auth::LogoutResponse)},
+  { 43, -1, sizeof(::auth::ValidationRequest)},
+  { 50, -1, sizeof(::auth::ValidationResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -296,29 +295,30 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 const char descriptor_table_protodef_auth_2eproto[] =
   "\n\nauth.proto\022\004auth\"2\n\013Credentials\022\021\n\tuse"
-  "r_name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\".\n\006Cookie"
-  "\022\022\n\nsession_id\030\001 \001(\003\022\020\n\010hash_key\030\002 \001(\t\"n"
-  "\n\006Status\022\037\n\004code\030\001 \001(\0162\021.auth.Status.Cod"
-  "e\"C\n\004Code\022\013\n\007UNKNOWN\020\000\022\006\n\002OK\020\001\022\021\n\rACCESS"
-  "_DENIED\020\002\022\023\n\017INVALID_SESSION\020\003\"6\n\014LoginR"
-  "equest\022&\n\013credentials\030\001 \001(\0132\021.auth.Crede"
-  "ntials\"K\n\rLoginResponse\022\034\n\006status\030\001 \001(\0132"
-  "\014.auth.Status\022\034\n\006cookie\030\002 \001(\0132\014.auth.Coo"
-  "kie\"-\n\rLogoutRequest\022\034\n\006cookie\030\001 \001(\0132\014.a"
-  "uth.Cookie\"\020\n\016LogoutResponse\"C\n\021Validati"
-  "onRequest\022\034\n\006cookie\030\001 \001(\0132\014.auth.Cookie\022"
-  "\020\n\010resource\030\002 \001(\t\"2\n\022ValidationResponse\022"
-  "\034\n\006status\030\001 \001(\0132\014.auth.Status2\273\001\n\rAuthen"
-  "ticator\0222\n\005Login\022\022.auth.LoginRequest\032\023.a"
-  "uth.LoginResponse\"\000\0225\n\006Logout\022\023.auth.Log"
-  "outRequest\032\024.auth.LogoutResponse\"\000\022\?\n\010Va"
-  "lidate\022\027.auth.ValidationRequest\032\030.auth.V"
-  "alidationResponse\"\000b\006proto3"
+  "r_name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\034\n\006Cookie"
+  "\022\022\n\nsession_id\030\001 \001(\t\"n\n\006Status\022\037\n\004code\030\001"
+  " \001(\0162\021.auth.Status.Code\"C\n\004Code\022\013\n\007UNKNO"
+  "WN\020\000\022\006\n\002OK\020\001\022\021\n\rACCESS_DENIED\020\002\022\023\n\017INVAL"
+  "ID_SESSION\020\003\"6\n\014LoginRequest\022&\n\013credenti"
+  "als\030\001 \001(\0132\021.auth.Credentials\"K\n\rLoginRes"
+  "ponse\022\034\n\006status\030\001 \001(\0132\014.auth.Status\022\034\n\006c"
+  "ookie\030\002 \001(\0132\014.auth.Cookie\"-\n\rLogoutReque"
+  "st\022\034\n\006cookie\030\001 \001(\0132\014.auth.Cookie\"\020\n\016Logo"
+  "utResponse\"C\n\021ValidationRequest\022\034\n\006cooki"
+  "e\030\001 \001(\0132\014.auth.Cookie\022\020\n\010resource\030\002 \001(\t\""
+  "2\n\022ValidationResponse\022\034\n\006status\030\001 \001(\0132\014."
+  "auth.Status2\273\001\n\rAuthenticator\0222\n\005Login\022\022"
+  ".auth.LoginRequest\032\023.auth.LoginResponse\""
+  "\000\0225\n\006Logout\022\023.auth.LogoutRequest\032\024.auth."
+  "LogoutResponse\"\000\022\?\n\010Validate\022\027.auth.Vali"
+  "dationRequest\032\030.auth.ValidationResponse\""
+  "\000B&Z$github.com/andrei_ilyin/auth-servic"
+  "eb\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_auth_2eproto = {
   false, InitDefaults_auth_2eproto, 
   descriptor_table_protodef_auth_2eproto,
-  "auth.proto", &assign_descriptors_table_auth_2eproto, 747,
+  "auth.proto", &assign_descriptors_table_auth_2eproto, 769,
 };
 
 void AddDescriptors_auth_2eproto() {
@@ -737,7 +737,6 @@ class Cookie::HasBitSetters {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Cookie::kSessionIdFieldNumber;
-const int Cookie::kHashKeyFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Cookie::Cookie()
@@ -749,19 +748,17 @@ Cookie::Cookie(const Cookie& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  hash_key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.hash_key().size() > 0) {
-    hash_key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hash_key_);
+  session_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.session_id().size() > 0) {
+    session_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.session_id_);
   }
-  session_id_ = from.session_id_;
   // @@protoc_insertion_point(copy_constructor:auth.Cookie)
 }
 
 void Cookie::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_Cookie_auth_2eproto.base);
-  hash_key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  session_id_ = PROTOBUF_LONGLONG(0);
+  session_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Cookie::~Cookie() {
@@ -770,7 +767,7 @@ Cookie::~Cookie() {
 }
 
 void Cookie::SharedDtor() {
-  hash_key_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  session_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Cookie::SetCachedSize(int size) const {
@@ -788,8 +785,7 @@ void Cookie::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  hash_key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  session_id_ = PROTOBUF_LONGLONG(0);
+  session_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -806,20 +802,13 @@ const char* Cookie::_InternalParse(const char* begin, const char* end, void* obj
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // int64 session_id = 1;
+      // string session_id = 1;
       case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_session_id(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
-      // string hash_key = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("auth.Cookie.hash_key");
-        object = msg->mutable_hash_key();
+        ctx->extra_parse_data().SetFieldName("auth.Cookie.session_id");
+        object = msg->mutable_session_id();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -863,28 +852,15 @@ bool Cookie::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 session_id = 1;
+      // string session_id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &session_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string hash_key = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_hash_key()));
+                input, this->mutable_session_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->hash_key().data(), static_cast<int>(this->hash_key().length()),
+            this->session_id().data(), static_cast<int>(this->session_id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "auth.Cookie.hash_key"));
+            "auth.Cookie.session_id"));
         } else {
           goto handle_unusual;
         }
@@ -918,19 +894,14 @@ void Cookie::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 session_id = 1;
-  if (this->session_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->session_id(), output);
-  }
-
-  // string hash_key = 2;
-  if (this->hash_key().size() > 0) {
+  // string session_id = 1;
+  if (this->session_id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->hash_key().data(), static_cast<int>(this->hash_key().length()),
+      this->session_id().data(), static_cast<int>(this->session_id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "auth.Cookie.hash_key");
+      "auth.Cookie.session_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->hash_key(), output);
+      1, this->session_id(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -946,20 +917,15 @@ void Cookie::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 session_id = 1;
-  if (this->session_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->session_id(), target);
-  }
-
-  // string hash_key = 2;
-  if (this->hash_key().size() > 0) {
+  // string session_id = 1;
+  if (this->session_id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->hash_key().data(), static_cast<int>(this->hash_key().length()),
+      this->session_id().data(), static_cast<int>(this->session_id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "auth.Cookie.hash_key");
+      "auth.Cookie.session_id");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->hash_key(), target);
+        1, this->session_id(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -983,17 +949,10 @@ size_t Cookie::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string hash_key = 2;
-  if (this->hash_key().size() > 0) {
+  // string session_id = 1;
+  if (this->session_id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->hash_key());
-  }
-
-  // int64 session_id = 1;
-  if (this->session_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->session_id());
   }
 
@@ -1024,12 +983,9 @@ void Cookie::MergeFrom(const Cookie& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.hash_key().size() > 0) {
+  if (from.session_id().size() > 0) {
 
-    hash_key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hash_key_);
-  }
-  if (from.session_id() != 0) {
-    set_session_id(from.session_id());
+    session_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.session_id_);
   }
 }
 
@@ -1058,9 +1014,8 @@ void Cookie::Swap(Cookie* other) {
 void Cookie::InternalSwap(Cookie* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  hash_key_.Swap(&other->hash_key_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  session_id_.Swap(&other->session_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(session_id_, other->session_id_);
 }
 
 ::google::protobuf::Metadata Cookie::GetMetadata() const {

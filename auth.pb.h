@@ -348,33 +348,26 @@ class Cookie final :
 
   // accessors -------------------------------------------------------
 
-  // string hash_key = 2;
-  void clear_hash_key();
-  static const int kHashKeyFieldNumber = 2;
-  const ::std::string& hash_key() const;
-  void set_hash_key(const ::std::string& value);
-  #if LANG_CXX11
-  void set_hash_key(::std::string&& value);
-  #endif
-  void set_hash_key(const char* value);
-  void set_hash_key(const char* value, size_t size);
-  ::std::string* mutable_hash_key();
-  ::std::string* release_hash_key();
-  void set_allocated_hash_key(::std::string* hash_key);
-
-  // int64 session_id = 1;
+  // string session_id = 1;
   void clear_session_id();
   static const int kSessionIdFieldNumber = 1;
-  ::google::protobuf::int64 session_id() const;
-  void set_session_id(::google::protobuf::int64 value);
+  const ::std::string& session_id() const;
+  void set_session_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_session_id(::std::string&& value);
+  #endif
+  void set_session_id(const char* value);
+  void set_session_id(const char* value, size_t size);
+  ::std::string* mutable_session_id();
+  ::std::string* release_session_id();
+  void set_allocated_session_id(::std::string* session_id);
 
   // @@protoc_insertion_point(class_scope:auth.Cookie)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr hash_key_;
-  ::google::protobuf::int64 session_id_;
+  ::google::protobuf::internal::ArenaStringPtr session_id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_auth_2eproto;
 };
@@ -1346,71 +1339,57 @@ inline void Credentials::set_allocated_password(::std::string* password) {
 
 // Cookie
 
-// int64 session_id = 1;
+// string session_id = 1;
 inline void Cookie::clear_session_id() {
-  session_id_ = PROTOBUF_LONGLONG(0);
+  session_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::int64 Cookie::session_id() const {
+inline const ::std::string& Cookie::session_id() const {
   // @@protoc_insertion_point(field_get:auth.Cookie.session_id)
-  return session_id_;
+  return session_id_.GetNoArena();
 }
-inline void Cookie::set_session_id(::google::protobuf::int64 value) {
+inline void Cookie::set_session_id(const ::std::string& value) {
   
-  session_id_ = value;
+  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:auth.Cookie.session_id)
 }
-
-// string hash_key = 2;
-inline void Cookie::clear_hash_key() {
-  hash_key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Cookie::hash_key() const {
-  // @@protoc_insertion_point(field_get:auth.Cookie.hash_key)
-  return hash_key_.GetNoArena();
-}
-inline void Cookie::set_hash_key(const ::std::string& value) {
-  
-  hash_key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:auth.Cookie.hash_key)
-}
 #if LANG_CXX11
-inline void Cookie::set_hash_key(::std::string&& value) {
+inline void Cookie::set_session_id(::std::string&& value) {
   
-  hash_key_.SetNoArena(
+  session_id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:auth.Cookie.hash_key)
+  // @@protoc_insertion_point(field_set_rvalue:auth.Cookie.session_id)
 }
 #endif
-inline void Cookie::set_hash_key(const char* value) {
+inline void Cookie::set_session_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  hash_key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:auth.Cookie.hash_key)
+  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:auth.Cookie.session_id)
 }
-inline void Cookie::set_hash_key(const char* value, size_t size) {
+inline void Cookie::set_session_id(const char* value, size_t size) {
   
-  hash_key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:auth.Cookie.hash_key)
+  // @@protoc_insertion_point(field_set_pointer:auth.Cookie.session_id)
 }
-inline ::std::string* Cookie::mutable_hash_key() {
+inline ::std::string* Cookie::mutable_session_id() {
   
-  // @@protoc_insertion_point(field_mutable:auth.Cookie.hash_key)
-  return hash_key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:auth.Cookie.session_id)
+  return session_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Cookie::release_hash_key() {
-  // @@protoc_insertion_point(field_release:auth.Cookie.hash_key)
+inline ::std::string* Cookie::release_session_id() {
+  // @@protoc_insertion_point(field_release:auth.Cookie.session_id)
   
-  return hash_key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return session_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Cookie::set_allocated_hash_key(::std::string* hash_key) {
-  if (hash_key != nullptr) {
+inline void Cookie::set_allocated_session_id(::std::string* session_id) {
+  if (session_id != nullptr) {
     
   } else {
     
   }
-  hash_key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hash_key);
-  // @@protoc_insertion_point(field_set_allocated:auth.Cookie.hash_key)
+  session_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), session_id);
+  // @@protoc_insertion_point(field_set_allocated:auth.Cookie.session_id)
 }
 
 // -------------------------------------------------------------------

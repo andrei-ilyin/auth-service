@@ -1,9 +1,7 @@
 CXX = g++
-CPPFLAGS += `pkg-config --cflags protobuf grpc`
-CXXFLAGS += -std=c++11
-LDFLAGS += -L/usr/local/lib `pkg-config --libs protobuf grpc++ grpc`\
-           -Wl,--no-as-needed -lgrpc++_reflection -Wl,--as-needed\
-           -ldl
+CXXFLAGS += -std=c++17
+CPPFLAGS += `pkg-config --cflags protobuf grpc grpc libmongocxx`
+LDFLAGS += `pkg-config --libs protobuf grpc++ grpc libmongocxx`	
 
 PROTOC = protoc
 GRPC_CPP_PLUGIN = grpc_cpp_plugin

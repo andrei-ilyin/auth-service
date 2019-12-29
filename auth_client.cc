@@ -13,7 +13,7 @@ using grpc::Status;
 
 class AuthenticatorClient {
  public:
-  explicit AuthenticatorClient(const std::shared_ptr <Channel>& channel)
+  explicit AuthenticatorClient(const std::shared_ptr<Channel>& channel)
       : stub_(auth::Authenticator::NewStub(channel)) {}
 
   bool Login(const std::string& username, const std::string& password) {
@@ -26,8 +26,8 @@ class AuthenticatorClient {
     Status status = stub_->Login(&context, request, &response);
 
     if (!status.ok()) {
-      std::cerr << status.error_code() << ": " << status.error_message()
-                << std::endl;
+      std::cerr << "Error " << status.error_code() << ": "
+                << status.error_message() << std::endl;
       return false;
     }
 
@@ -51,8 +51,8 @@ class AuthenticatorClient {
     Status status = stub_->Logout(&context, request, &response);
 
     if (!status.ok()) {
-      std::cerr << status.error_code() << ": " << status.error_message()
-                << std::endl;
+      std::cerr << "Error " << status.error_code() << ": "
+                << status.error_message() << std::endl;
       return false;
     }
 
@@ -69,8 +69,8 @@ class AuthenticatorClient {
     Status status = stub_->Validate(&context, request, &response);
 
     if (!status.ok()) {
-      std::cerr << status.error_code() << ": " << status.error_message()
-                << std::endl;
+      std::cerr << "Error " << status.error_code() << ": "
+                << status.error_message() << std::endl;
       return false;
     }
 
@@ -90,7 +90,7 @@ class AuthenticatorClient {
   }
 
  private:
-  std::unique_ptr <auth::Authenticator::Stub> stub_;
+  std::unique_ptr<auth::Authenticator::Stub> stub_;
   auth::Cookie cookie_;
 };
 
@@ -103,34 +103,33 @@ int main(int argc, char** argv) {
   AuthenticatorClient client(grpc::CreateChannel(
       "localhost:50051", grpc::InsecureChannelCredentials()));
 
-  // Вход в систему
   if (!client.Login(argv[1], argv[2])) {
     return 1;
   }
+
   std::cout << "Session ID = " << client.GetCookie().session_id() << '\n';
-  std::cout << "Cookie key = " << client.GetCookie().hash_key() << '\n';
 
-  // Запрос на права доступа при активном сеансе
   if (client.ValidateAccess("public")) {
     std::cout << "Access to 'public' granted!\n";
   }
   if (client.ValidateAccess("secret")) {
     std::cout << "Access to 'secret' granted!\n";
   }
+  if (client.ValidateAccess("unknown")) {
+    std::cout << "Access to 'unknown' granted!\n";
+  }
 
-  // Завершение сеанса
   client.Logout();
 
-  // Запрос на права доступа при невалидной информации о сесии
   if (client.ValidateAccess("public")) {
     std::cout << "Access to 'public' granted!\n";
   }
   if (client.ValidateAccess("secret")) {
     std::cout << "Access to 'secret' granted!\n";
   }
-
-  // Попытка повторного завершения сеанса (который уже удалён)
-  client.Logout();
+  if (client.ValidateAccess("unknown")) {
+    std::cout << "Access to 'unknown' granted!\n";
+  }
 
   return 0;
 }

@@ -98,12 +98,13 @@ enum Status_Code {
   Status_Code_OK = 1,
   Status_Code_ACCESS_DENIED = 2,
   Status_Code_INVALID_SESSION = 3,
+  Status_Code_INTERNAL_ERROR = 4,
   Status_Code_Status_Code_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::google::protobuf::int32>::min(),
   Status_Code_Status_Code_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::google::protobuf::int32>::max()
 };
 bool Status_Code_IsValid(int value);
 const Status_Code Status_Code_Code_MIN = Status_Code_UNKNOWN;
-const Status_Code Status_Code_Code_MAX = Status_Code_INVALID_SESSION;
+const Status_Code Status_Code_Code_MAX = Status_Code_INTERNAL_ERROR;
 const int Status_Code_Code_ARRAYSIZE = Status_Code_Code_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Status_Code_descriptor();
@@ -475,6 +476,8 @@ class Status final :
     Status_Code_ACCESS_DENIED;
   static const Code INVALID_SESSION =
     Status_Code_INVALID_SESSION;
+  static const Code INTERNAL_ERROR =
+    Status_Code_INTERNAL_ERROR;
   static inline bool Code_IsValid(int value) {
     return Status_Code_IsValid(value);
   }
@@ -619,12 +622,22 @@ class LoginRequest final :
   ::auth::Credentials* mutable_credentials();
   void set_allocated_credentials(::auth::Credentials* credentials);
 
+  // .auth.Cookie cookie = 2;
+  bool has_cookie() const;
+  void clear_cookie();
+  static const int kCookieFieldNumber = 2;
+  const ::auth::Cookie& cookie() const;
+  ::auth::Cookie* release_cookie();
+  ::auth::Cookie* mutable_cookie();
+  void set_allocated_cookie(::auth::Cookie* cookie);
+
   // @@protoc_insertion_point(class_scope:auth.LoginRequest)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::auth::Credentials* credentials_;
+  ::auth::Cookie* cookie_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_auth_2eproto;
 };
@@ -734,22 +747,12 @@ class LoginResponse final :
   ::auth::Status* mutable_status();
   void set_allocated_status(::auth::Status* status);
 
-  // .auth.Cookie cookie = 2;
-  bool has_cookie() const;
-  void clear_cookie();
-  static const int kCookieFieldNumber = 2;
-  const ::auth::Cookie& cookie() const;
-  ::auth::Cookie* release_cookie();
-  ::auth::Cookie* mutable_cookie();
-  void set_allocated_cookie(::auth::Cookie* cookie);
-
   // @@protoc_insertion_point(class_scope:auth.LoginResponse)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::auth::Status* status_;
-  ::auth::Cookie* cookie_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_auth_2eproto;
 };
@@ -965,11 +968,21 @@ class LogoutResponse final :
 
   // accessors -------------------------------------------------------
 
+  // .auth.Status status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  const ::auth::Status& status() const;
+  ::auth::Status* release_status();
+  ::auth::Status* mutable_status();
+  void set_allocated_status(::auth::Status* status);
+
   // @@protoc_insertion_point(class_scope:auth.LogoutResponse)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::auth::Status* status_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_auth_2eproto;
 };
@@ -1465,6 +1478,57 @@ inline void LoginRequest::set_allocated_credentials(::auth::Credentials* credent
   // @@protoc_insertion_point(field_set_allocated:auth.LoginRequest.credentials)
 }
 
+// .auth.Cookie cookie = 2;
+inline bool LoginRequest::has_cookie() const {
+  return this != internal_default_instance() && cookie_ != nullptr;
+}
+inline void LoginRequest::clear_cookie() {
+  if (GetArenaNoVirtual() == nullptr && cookie_ != nullptr) {
+    delete cookie_;
+  }
+  cookie_ = nullptr;
+}
+inline const ::auth::Cookie& LoginRequest::cookie() const {
+  const ::auth::Cookie* p = cookie_;
+  // @@protoc_insertion_point(field_get:auth.LoginRequest.cookie)
+  return p != nullptr ? *p : *reinterpret_cast<const ::auth::Cookie*>(
+      &::auth::_Cookie_default_instance_);
+}
+inline ::auth::Cookie* LoginRequest::release_cookie() {
+  // @@protoc_insertion_point(field_release:auth.LoginRequest.cookie)
+  
+  ::auth::Cookie* temp = cookie_;
+  cookie_ = nullptr;
+  return temp;
+}
+inline ::auth::Cookie* LoginRequest::mutable_cookie() {
+  
+  if (cookie_ == nullptr) {
+    auto* p = CreateMaybeMessage<::auth::Cookie>(GetArenaNoVirtual());
+    cookie_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:auth.LoginRequest.cookie)
+  return cookie_;
+}
+inline void LoginRequest::set_allocated_cookie(::auth::Cookie* cookie) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete cookie_;
+  }
+  if (cookie) {
+    ::google::protobuf::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      cookie = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, cookie, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  cookie_ = cookie;
+  // @@protoc_insertion_point(field_set_allocated:auth.LoginRequest.cookie)
+}
+
 // -------------------------------------------------------------------
 
 // LoginResponse
@@ -1518,57 +1582,6 @@ inline void LoginResponse::set_allocated_status(::auth::Status* status) {
   }
   status_ = status;
   // @@protoc_insertion_point(field_set_allocated:auth.LoginResponse.status)
-}
-
-// .auth.Cookie cookie = 2;
-inline bool LoginResponse::has_cookie() const {
-  return this != internal_default_instance() && cookie_ != nullptr;
-}
-inline void LoginResponse::clear_cookie() {
-  if (GetArenaNoVirtual() == nullptr && cookie_ != nullptr) {
-    delete cookie_;
-  }
-  cookie_ = nullptr;
-}
-inline const ::auth::Cookie& LoginResponse::cookie() const {
-  const ::auth::Cookie* p = cookie_;
-  // @@protoc_insertion_point(field_get:auth.LoginResponse.cookie)
-  return p != nullptr ? *p : *reinterpret_cast<const ::auth::Cookie*>(
-      &::auth::_Cookie_default_instance_);
-}
-inline ::auth::Cookie* LoginResponse::release_cookie() {
-  // @@protoc_insertion_point(field_release:auth.LoginResponse.cookie)
-  
-  ::auth::Cookie* temp = cookie_;
-  cookie_ = nullptr;
-  return temp;
-}
-inline ::auth::Cookie* LoginResponse::mutable_cookie() {
-  
-  if (cookie_ == nullptr) {
-    auto* p = CreateMaybeMessage<::auth::Cookie>(GetArenaNoVirtual());
-    cookie_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:auth.LoginResponse.cookie)
-  return cookie_;
-}
-inline void LoginResponse::set_allocated_cookie(::auth::Cookie* cookie) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete cookie_;
-  }
-  if (cookie) {
-    ::google::protobuf::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      cookie = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, cookie, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  cookie_ = cookie;
-  // @@protoc_insertion_point(field_set_allocated:auth.LoginResponse.cookie)
 }
 
 // -------------------------------------------------------------------
@@ -1629,6 +1642,57 @@ inline void LogoutRequest::set_allocated_cookie(::auth::Cookie* cookie) {
 // -------------------------------------------------------------------
 
 // LogoutResponse
+
+// .auth.Status status = 1;
+inline bool LogoutResponse::has_status() const {
+  return this != internal_default_instance() && status_ != nullptr;
+}
+inline void LogoutResponse::clear_status() {
+  if (GetArenaNoVirtual() == nullptr && status_ != nullptr) {
+    delete status_;
+  }
+  status_ = nullptr;
+}
+inline const ::auth::Status& LogoutResponse::status() const {
+  const ::auth::Status* p = status_;
+  // @@protoc_insertion_point(field_get:auth.LogoutResponse.status)
+  return p != nullptr ? *p : *reinterpret_cast<const ::auth::Status*>(
+      &::auth::_Status_default_instance_);
+}
+inline ::auth::Status* LogoutResponse::release_status() {
+  // @@protoc_insertion_point(field_release:auth.LogoutResponse.status)
+  
+  ::auth::Status* temp = status_;
+  status_ = nullptr;
+  return temp;
+}
+inline ::auth::Status* LogoutResponse::mutable_status() {
+  
+  if (status_ == nullptr) {
+    auto* p = CreateMaybeMessage<::auth::Status>(GetArenaNoVirtual());
+    status_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:auth.LogoutResponse.status)
+  return status_;
+}
+inline void LogoutResponse::set_allocated_status(::auth::Status* status) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete status_;
+  }
+  if (status) {
+    ::google::protobuf::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      status = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, status, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  status_ = status;
+  // @@protoc_insertion_point(field_set_allocated:auth.LogoutResponse.status)
+}
 
 // -------------------------------------------------------------------
 

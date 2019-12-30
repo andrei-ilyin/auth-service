@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <random>
 #include <string>
 
 #include <grpcpp/grpcpp.h>
@@ -11,15 +12,21 @@ using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
 
+constexpr int kSessionIdLength = 24;
+
 class AuthenticatorClient {
  public:
   explicit AuthenticatorClient(const std::shared_ptr<Channel>& channel)
-      : stub_(auth::Authenticator::NewStub(channel)) {}
+      : stub_(auth::Authenticator::NewStub(channel)),
+        rand_generator_(std::random_device()()) {}
 
   bool Login(const std::string& username, const std::string& password) {
+    cookie_.set_session_id(RandomString(kSessionIdLength));
+
     auth::LoginRequest request;
     request.mutable_credentials()->set_user_name(username);
     request.mutable_credentials()->set_password(password);
+    *request.mutable_cookie() = cookie_;
 
     auth::LoginResponse response;
     ClientContext context;
@@ -38,7 +45,6 @@ class AuthenticatorClient {
       return false;
     }
 
-    cookie_ = std::move(*response.mutable_cookie());
     return true;
   }
 
@@ -53,6 +59,13 @@ class AuthenticatorClient {
     if (!status.ok()) {
       std::cerr << "Error " << status.error_code() << ": "
                 << status.error_message() << std::endl;
+      return false;
+    }
+
+    if (response.status().code() != auth::Status_Code_OK) {
+      std::cerr << "Logout failed with status "
+                << auth::Status_Code_Name(response.status().code())
+                << std::endl;
       return false;
     }
 
@@ -90,20 +103,33 @@ class AuthenticatorClient {
   }
 
  private:
+  std::string RandomString(int length) {
+    auto randchar = [this]() -> char {
+      const char charset[] = "0123456789abcdef";
+      const size_t max_index = (sizeof(charset) - 1);
+      return charset[rand_generator_() % max_index];
+    };
+    std::string str(length, 0);
+    std::generate_n(str.begin(), length, randchar);
+    return str;
+  }
+
   std::unique_ptr<auth::Authenticator::Stub> stub_;
   auth::Cookie cookie_;
+  std::mt19937 rand_generator_;
 };
 
 int main(int argc, char** argv) {
-  if (argc != 3) {
-    std::cerr << "Usage: " << argv[0] << " {login} {password}" << std::endl;
+  if (argc != 4) {
+    std::cerr << "Usage: " << argv[0]
+              << "{server:port} {login} {password}" << std::endl;
     return 1;
   }
 
   AuthenticatorClient client(grpc::CreateChannel(
-      "localhost:50051", grpc::InsecureChannelCredentials()));
+      argv[1], grpc::InsecureChannelCredentials()));
 
-  if (!client.Login(argv[1], argv[2])) {
+  if (!client.Login(argv[2], argv[3])) {
     return 1;
   }
 

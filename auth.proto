@@ -18,22 +18,24 @@ message Status {
         OK = 1;
         ACCESS_DENIED = 2;
         INVALID_SESSION = 3;
+        INTERNAL_ERROR = 4;
     }
     Code code = 1;
 }
 
 message LoginRequest {
     Credentials credentials = 1;
+    Cookie cookie = 2;
 }
 message LoginResponse {
     Status status = 1;
-    Cookie cookie = 2;
 }
 
 message LogoutRequest {
     Cookie cookie = 1;
 }
 message LogoutResponse {
+    Status status = 1;
 }
 
 message ValidationRequest {

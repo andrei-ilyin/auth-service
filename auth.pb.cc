@@ -110,9 +110,10 @@ static void InitDefaultsLoginRequest_auth_2eproto() {
   ::auth::LoginRequest::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_LoginRequest_auth_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsLoginRequest_auth_2eproto}, {
-      &scc_info_Credentials_auth_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<2> scc_info_LoginRequest_auth_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsLoginRequest_auth_2eproto}, {
+      &scc_info_Credentials_auth_2eproto.base,
+      &scc_info_Cookie_auth_2eproto.base,}};
 
 static void InitDefaultsLoginResponse_auth_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -125,10 +126,9 @@ static void InitDefaultsLoginResponse_auth_2eproto() {
   ::auth::LoginResponse::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<2> scc_info_LoginResponse_auth_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsLoginResponse_auth_2eproto}, {
-      &scc_info_Status_auth_2eproto.base,
-      &scc_info_Cookie_auth_2eproto.base,}};
+::google::protobuf::internal::SCCInfo<1> scc_info_LoginResponse_auth_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsLoginResponse_auth_2eproto}, {
+      &scc_info_Status_auth_2eproto.base,}};
 
 static void InitDefaultsLogoutRequest_auth_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -156,8 +156,9 @@ static void InitDefaultsLogoutResponse_auth_2eproto() {
   ::auth::LogoutResponse::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_LogoutResponse_auth_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsLogoutResponse_auth_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_LogoutResponse_auth_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsLogoutResponse_auth_2eproto}, {
+      &scc_info_Status_auth_2eproto.base,}};
 
 static void InitDefaultsValidationRequest_auth_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -231,13 +232,13 @@ const ::google::protobuf::uint32 TableStruct_auth_2eproto::offsets[] PROTOBUF_SE
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::auth::LoginRequest, credentials_),
+  PROTOBUF_FIELD_OFFSET(::auth::LoginRequest, cookie_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::auth::LoginResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::auth::LoginResponse, status_),
-  PROTOBUF_FIELD_OFFSET(::auth::LoginResponse, cookie_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::auth::LogoutRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -249,6 +250,7 @@ const ::google::protobuf::uint32 TableStruct_auth_2eproto::offsets[] PROTOBUF_SE
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::auth::LogoutResponse, status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::auth::ValidationRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -268,11 +270,11 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 7, -1, sizeof(::auth::Cookie)},
   { 13, -1, sizeof(::auth::Status)},
   { 19, -1, sizeof(::auth::LoginRequest)},
-  { 25, -1, sizeof(::auth::LoginResponse)},
+  { 26, -1, sizeof(::auth::LoginResponse)},
   { 32, -1, sizeof(::auth::LogoutRequest)},
   { 38, -1, sizeof(::auth::LogoutResponse)},
-  { 43, -1, sizeof(::auth::ValidationRequest)},
-  { 50, -1, sizeof(::auth::ValidationResponse)},
+  { 44, -1, sizeof(::auth::ValidationRequest)},
+  { 51, -1, sizeof(::auth::ValidationResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -296,29 +298,30 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 const char descriptor_table_protodef_auth_2eproto[] =
   "\n\nauth.proto\022\004auth\"2\n\013Credentials\022\021\n\tuse"
   "r_name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\034\n\006Cookie"
-  "\022\022\n\nsession_id\030\001 \001(\t\"n\n\006Status\022\037\n\004code\030\001"
-  " \001(\0162\021.auth.Status.Code\"C\n\004Code\022\013\n\007UNKNO"
-  "WN\020\000\022\006\n\002OK\020\001\022\021\n\rACCESS_DENIED\020\002\022\023\n\017INVAL"
-  "ID_SESSION\020\003\"6\n\014LoginRequest\022&\n\013credenti"
-  "als\030\001 \001(\0132\021.auth.Credentials\"K\n\rLoginRes"
-  "ponse\022\034\n\006status\030\001 \001(\0132\014.auth.Status\022\034\n\006c"
-  "ookie\030\002 \001(\0132\014.auth.Cookie\"-\n\rLogoutReque"
-  "st\022\034\n\006cookie\030\001 \001(\0132\014.auth.Cookie\"\020\n\016Logo"
-  "utResponse\"C\n\021ValidationRequest\022\034\n\006cooki"
-  "e\030\001 \001(\0132\014.auth.Cookie\022\020\n\010resource\030\002 \001(\t\""
-  "2\n\022ValidationResponse\022\034\n\006status\030\001 \001(\0132\014."
-  "auth.Status2\273\001\n\rAuthenticator\0222\n\005Login\022\022"
-  ".auth.LoginRequest\032\023.auth.LoginResponse\""
-  "\000\0225\n\006Logout\022\023.auth.LogoutRequest\032\024.auth."
-  "LogoutResponse\"\000\022\?\n\010Validate\022\027.auth.Vali"
-  "dationRequest\032\030.auth.ValidationResponse\""
-  "\000B&Z$github.com/andrei_ilyin/auth-servic"
-  "eb\006proto3"
+  "\022\022\n\nsession_id\030\001 \001(\t\"\202\001\n\006Status\022\037\n\004code\030"
+  "\001 \001(\0162\021.auth.Status.Code\"W\n\004Code\022\013\n\007UNKN"
+  "OWN\020\000\022\006\n\002OK\020\001\022\021\n\rACCESS_DENIED\020\002\022\023\n\017INVA"
+  "LID_SESSION\020\003\022\022\n\016INTERNAL_ERROR\020\004\"T\n\014Log"
+  "inRequest\022&\n\013credentials\030\001 \001(\0132\021.auth.Cr"
+  "edentials\022\034\n\006cookie\030\002 \001(\0132\014.auth.Cookie\""
+  "-\n\rLoginResponse\022\034\n\006status\030\001 \001(\0132\014.auth."
+  "Status\"-\n\rLogoutRequest\022\034\n\006cookie\030\001 \001(\0132"
+  "\014.auth.Cookie\".\n\016LogoutResponse\022\034\n\006statu"
+  "s\030\001 \001(\0132\014.auth.Status\"C\n\021ValidationReque"
+  "st\022\034\n\006cookie\030\001 \001(\0132\014.auth.Cookie\022\020\n\010reso"
+  "urce\030\002 \001(\t\"2\n\022ValidationResponse\022\034\n\006stat"
+  "us\030\001 \001(\0132\014.auth.Status2\273\001\n\rAuthenticator"
+  "\0222\n\005Login\022\022.auth.LoginRequest\032\023.auth.Log"
+  "inResponse\"\000\0225\n\006Logout\022\023.auth.LogoutRequ"
+  "est\032\024.auth.LogoutResponse\"\000\022\?\n\010Validate\022"
+  "\027.auth.ValidationRequest\032\030.auth.Validati"
+  "onResponse\"\000B&Z$github.com/andrei_ilyin/"
+  "auth-serviceb\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_auth_2eproto = {
   false, InitDefaults_auth_2eproto, 
   descriptor_table_protodef_auth_2eproto,
-  "auth.proto", &assign_descriptors_table_auth_2eproto, 769,
+  "auth.proto", &assign_descriptors_table_auth_2eproto, 820,
 };
 
 void AddDescriptors_auth_2eproto() {
@@ -341,6 +344,7 @@ bool Status_Code_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -352,6 +356,7 @@ const Status_Code Status::UNKNOWN;
 const Status_Code Status::OK;
 const Status_Code Status::ACCESS_DENIED;
 const Status_Code Status::INVALID_SESSION;
+const Status_Code Status::INTERNAL_ERROR;
 const Status_Code Status::Code_MIN;
 const Status_Code Status::Code_MAX;
 const int Status::Code_ARRAYSIZE;
@@ -1292,18 +1297,26 @@ void Status::InternalSwap(Status* other) {
 void LoginRequest::InitAsDefaultInstance() {
   ::auth::_LoginRequest_default_instance_._instance.get_mutable()->credentials_ = const_cast< ::auth::Credentials*>(
       ::auth::Credentials::internal_default_instance());
+  ::auth::_LoginRequest_default_instance_._instance.get_mutable()->cookie_ = const_cast< ::auth::Cookie*>(
+      ::auth::Cookie::internal_default_instance());
 }
 class LoginRequest::HasBitSetters {
  public:
   static const ::auth::Credentials& credentials(const LoginRequest* msg);
+  static const ::auth::Cookie& cookie(const LoginRequest* msg);
 };
 
 const ::auth::Credentials&
 LoginRequest::HasBitSetters::credentials(const LoginRequest* msg) {
   return *msg->credentials_;
 }
+const ::auth::Cookie&
+LoginRequest::HasBitSetters::cookie(const LoginRequest* msg) {
+  return *msg->cookie_;
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int LoginRequest::kCredentialsFieldNumber;
+const int LoginRequest::kCookieFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LoginRequest::LoginRequest()
@@ -1320,13 +1333,20 @@ LoginRequest::LoginRequest(const LoginRequest& from)
   } else {
     credentials_ = nullptr;
   }
+  if (from.has_cookie()) {
+    cookie_ = new ::auth::Cookie(*from.cookie_);
+  } else {
+    cookie_ = nullptr;
+  }
   // @@protoc_insertion_point(copy_constructor:auth.LoginRequest)
 }
 
 void LoginRequest::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_LoginRequest_auth_2eproto.base);
-  credentials_ = nullptr;
+  ::memset(&credentials_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&cookie_) -
+      reinterpret_cast<char*>(&credentials_)) + sizeof(cookie_));
 }
 
 LoginRequest::~LoginRequest() {
@@ -1336,6 +1356,7 @@ LoginRequest::~LoginRequest() {
 
 void LoginRequest::SharedDtor() {
   if (this != internal_default_instance()) delete credentials_;
+  if (this != internal_default_instance()) delete cookie_;
 }
 
 void LoginRequest::SetCachedSize(int size) const {
@@ -1357,6 +1378,10 @@ void LoginRequest::Clear() {
     delete credentials_;
   }
   credentials_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && cookie_ != nullptr) {
+    delete cookie_;
+  }
+  cookie_ = nullptr;
   _internal_metadata_.Clear();
 }
 
@@ -1380,6 +1405,19 @@ const char* LoginRequest::_InternalParse(const char* begin, const char* end, voi
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         parser_till_end = ::auth::Credentials::_InternalParse;
         object = msg->mutable_credentials();
+        if (size > end - ptr) goto len_delim_till_end;
+        ptr += size;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+            {parser_till_end, object}, ptr - size, ptr));
+        break;
+      }
+      // .auth.Cookie cookie = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::auth::Cookie::_InternalParse;
+        object = msg->mutable_cookie();
         if (size > end - ptr) goto len_delim_till_end;
         ptr += size;
         GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
@@ -1427,6 +1465,17 @@ bool LoginRequest::MergePartialFromCodedStream(
         break;
       }
 
+      // .auth.Cookie cookie = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_cookie()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1460,6 +1509,12 @@ void LoginRequest::SerializeWithCachedSizes(
       1, HasBitSetters::credentials(this), output);
   }
 
+  // .auth.Cookie cookie = 2;
+  if (this->has_cookie()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, HasBitSetters::cookie(this), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1478,6 +1533,13 @@ void LoginRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, HasBitSetters::credentials(this), target);
+  }
+
+  // .auth.Cookie cookie = 2;
+  if (this->has_cookie()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        2, HasBitSetters::cookie(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1506,6 +1568,13 @@ size_t LoginRequest::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *credentials_);
+  }
+
+  // .auth.Cookie cookie = 2;
+  if (this->has_cookie()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *cookie_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1538,6 +1607,9 @@ void LoginRequest::MergeFrom(const LoginRequest& from) {
   if (from.has_credentials()) {
     mutable_credentials()->::auth::Credentials::MergeFrom(from.credentials());
   }
+  if (from.has_cookie()) {
+    mutable_cookie()->::auth::Cookie::MergeFrom(from.cookie());
+  }
 }
 
 void LoginRequest::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1566,6 +1638,7 @@ void LoginRequest::InternalSwap(LoginRequest* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(credentials_, other->credentials_);
+  swap(cookie_, other->cookie_);
 }
 
 ::google::protobuf::Metadata LoginRequest::GetMetadata() const {
@@ -1579,26 +1652,18 @@ void LoginRequest::InternalSwap(LoginRequest* other) {
 void LoginResponse::InitAsDefaultInstance() {
   ::auth::_LoginResponse_default_instance_._instance.get_mutable()->status_ = const_cast< ::auth::Status*>(
       ::auth::Status::internal_default_instance());
-  ::auth::_LoginResponse_default_instance_._instance.get_mutable()->cookie_ = const_cast< ::auth::Cookie*>(
-      ::auth::Cookie::internal_default_instance());
 }
 class LoginResponse::HasBitSetters {
  public:
   static const ::auth::Status& status(const LoginResponse* msg);
-  static const ::auth::Cookie& cookie(const LoginResponse* msg);
 };
 
 const ::auth::Status&
 LoginResponse::HasBitSetters::status(const LoginResponse* msg) {
   return *msg->status_;
 }
-const ::auth::Cookie&
-LoginResponse::HasBitSetters::cookie(const LoginResponse* msg) {
-  return *msg->cookie_;
-}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int LoginResponse::kStatusFieldNumber;
-const int LoginResponse::kCookieFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LoginResponse::LoginResponse()
@@ -1615,20 +1680,13 @@ LoginResponse::LoginResponse(const LoginResponse& from)
   } else {
     status_ = nullptr;
   }
-  if (from.has_cookie()) {
-    cookie_ = new ::auth::Cookie(*from.cookie_);
-  } else {
-    cookie_ = nullptr;
-  }
   // @@protoc_insertion_point(copy_constructor:auth.LoginResponse)
 }
 
 void LoginResponse::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_LoginResponse_auth_2eproto.base);
-  ::memset(&status_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&cookie_) -
-      reinterpret_cast<char*>(&status_)) + sizeof(cookie_));
+  status_ = nullptr;
 }
 
 LoginResponse::~LoginResponse() {
@@ -1638,7 +1696,6 @@ LoginResponse::~LoginResponse() {
 
 void LoginResponse::SharedDtor() {
   if (this != internal_default_instance()) delete status_;
-  if (this != internal_default_instance()) delete cookie_;
 }
 
 void LoginResponse::SetCachedSize(int size) const {
@@ -1660,10 +1717,6 @@ void LoginResponse::Clear() {
     delete status_;
   }
   status_ = nullptr;
-  if (GetArenaNoVirtual() == nullptr && cookie_ != nullptr) {
-    delete cookie_;
-  }
-  cookie_ = nullptr;
   _internal_metadata_.Clear();
 }
 
@@ -1687,19 +1740,6 @@ const char* LoginResponse::_InternalParse(const char* begin, const char* end, vo
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         parser_till_end = ::auth::Status::_InternalParse;
         object = msg->mutable_status();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
-      // .auth.Cookie cookie = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::auth::Cookie::_InternalParse;
-        object = msg->mutable_cookie();
         if (size > end - ptr) goto len_delim_till_end;
         ptr += size;
         GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
@@ -1747,17 +1787,6 @@ bool LoginResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // .auth.Cookie cookie = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_cookie()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1791,12 +1820,6 @@ void LoginResponse::SerializeWithCachedSizes(
       1, HasBitSetters::status(this), output);
   }
 
-  // .auth.Cookie cookie = 2;
-  if (this->has_cookie()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, HasBitSetters::cookie(this), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1815,13 +1838,6 @@ void LoginResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, HasBitSetters::status(this), target);
-  }
-
-  // .auth.Cookie cookie = 2;
-  if (this->has_cookie()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, HasBitSetters::cookie(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1850,13 +1866,6 @@ size_t LoginResponse::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
         *status_);
-  }
-
-  // .auth.Cookie cookie = 2;
-  if (this->has_cookie()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *cookie_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1889,9 +1898,6 @@ void LoginResponse::MergeFrom(const LoginResponse& from) {
   if (from.has_status()) {
     mutable_status()->::auth::Status::MergeFrom(from.status());
   }
-  if (from.has_cookie()) {
-    mutable_cookie()->::auth::Cookie::MergeFrom(from.cookie());
-  }
 }
 
 void LoginResponse::CopyFrom(const ::google::protobuf::Message& from) {
@@ -1920,7 +1926,6 @@ void LoginResponse::InternalSwap(LoginResponse* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(status_, other->status_);
-  swap(cookie_, other->cookie_);
 }
 
 ::google::protobuf::Metadata LoginResponse::GetMetadata() const {
@@ -2219,12 +2224,20 @@ void LogoutRequest::InternalSwap(LogoutRequest* other) {
 // ===================================================================
 
 void LogoutResponse::InitAsDefaultInstance() {
+  ::auth::_LogoutResponse_default_instance_._instance.get_mutable()->status_ = const_cast< ::auth::Status*>(
+      ::auth::Status::internal_default_instance());
 }
 class LogoutResponse::HasBitSetters {
  public:
+  static const ::auth::Status& status(const LogoutResponse* msg);
 };
 
+const ::auth::Status&
+LogoutResponse::HasBitSetters::status(const LogoutResponse* msg) {
+  return *msg->status_;
+}
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int LogoutResponse::kStatusFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LogoutResponse::LogoutResponse()
@@ -2236,10 +2249,18 @@ LogoutResponse::LogoutResponse(const LogoutResponse& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_status()) {
+    status_ = new ::auth::Status(*from.status_);
+  } else {
+    status_ = nullptr;
+  }
   // @@protoc_insertion_point(copy_constructor:auth.LogoutResponse)
 }
 
 void LogoutResponse::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_LogoutResponse_auth_2eproto.base);
+  status_ = nullptr;
 }
 
 LogoutResponse::~LogoutResponse() {
@@ -2248,6 +2269,7 @@ LogoutResponse::~LogoutResponse() {
 }
 
 void LogoutResponse::SharedDtor() {
+  if (this != internal_default_instance()) delete status_;
 }
 
 void LogoutResponse::SetCachedSize(int size) const {
@@ -2265,6 +2287,10 @@ void LogoutResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaNoVirtual() == nullptr && status_ != nullptr) {
+    delete status_;
+  }
+  status_ = nullptr;
   _internal_metadata_.Clear();
 }
 
@@ -2281,7 +2307,21 @@ const char* LogoutResponse::_InternalParse(const char* begin, const char* end, v
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
+      // .auth.Status status = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        parser_till_end = ::auth::Status::_InternalParse;
+        object = msg->mutable_status();
+        if (size > end - ptr) goto len_delim_till_end;
+        ptr += size;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
+            {parser_till_end, object}, ptr - size, ptr));
+        break;
+      }
       default: {
+      handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
           ctx->EndGroup(tag);
           return ptr;
@@ -2295,6 +2335,9 @@ const char* LogoutResponse::_InternalParse(const char* begin, const char* end, v
     }  // switch
   }  // while
   return ptr;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool LogoutResponse::MergePartialFromCodedStream(
@@ -2306,12 +2349,28 @@ bool LogoutResponse::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0) {
-      goto success;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .auth.Status status = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_status()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, _internal_metadata_.mutable_unknown_fields()));
   }
 success:
   // @@protoc_insertion_point(parse_success:auth.LogoutResponse)
@@ -2329,6 +2388,12 @@ void LogoutResponse::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  // .auth.Status status = 1;
+  if (this->has_status()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, HasBitSetters::status(this), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -2341,6 +2406,13 @@ void LogoutResponse::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_to_array_start:auth.LogoutResponse)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
+
+  // .auth.Status status = 1;
+  if (this->has_status()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, HasBitSetters::status(this), target);
+  }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -2362,6 +2434,13 @@ size_t LogoutResponse::ByteSizeLong() const {
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .auth.Status status = 1;
+  if (this->has_status()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *status_);
+  }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
@@ -2390,6 +2469,9 @@ void LogoutResponse::MergeFrom(const LogoutResponse& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.has_status()) {
+    mutable_status()->::auth::Status::MergeFrom(from.status());
+  }
 }
 
 void LogoutResponse::CopyFrom(const ::google::protobuf::Message& from) {
@@ -2417,6 +2499,7 @@ void LogoutResponse::Swap(LogoutResponse* other) {
 void LogoutResponse::InternalSwap(LogoutResponse* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(status_, other->status_);
 }
 
 ::google::protobuf::Metadata LogoutResponse::GetMetadata() const {

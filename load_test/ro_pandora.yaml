@@ -7,15 +7,15 @@ pools:
       type: custom_provider
       source: # You may just write file path here. Or stdin.
         type: file
-        path: ./ammo.txt
+        path: ./ro_ammo.txt
 
     result:
       type: phout
       destination: ./phout.log
 
     rps:
-      - {duration: 30s, type: line,  from: 1, to: 8000}
-      - {duration: 60s, type: const,  ops: 8000}
+      - {duration: 60s, type: line,  from: 1, to: 10000}
+      - {duration: 300s, type: const,  ops: 10000}
 
     startup:
       type: once

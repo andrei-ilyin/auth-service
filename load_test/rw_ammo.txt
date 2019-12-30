@@ -1,5 +1,4 @@
 {"tag": "Login", "Param1": "admin", "Param2": "1111111", "Param3": "978a9857ac885cd8fd33055c"}
-{"tag": "Login", "Param1": "admin", "Param2": "1111111", "Param3": "978a9857ac885cd8fd33055c"}
 {"tag": "Login", "Param1": "user123", "Param2": "32250170a0dca92d53ec9624f336ca24" , "Param3": "978a9857ac885cd8fd33055d"}
 {"tag": "Login", "Param1": "admin", "Param2": "invalid_password", "Param3": "978a9857ac885cd8fd33055e"}
 {"tag": "Login", "Param1": "invalid_user", "Param2": "invalid_password", "Param3": "978a9857ac885cd8fd33055e"}

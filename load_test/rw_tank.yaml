@@ -11,7 +11,7 @@ pandora:
   enabled: true
   package: yandextank.plugins.Pandora
   pandora_cmd: ./grpc_gun
-  config_file: ./pandora.yaml
+  config_file: ./rw_pandora.yaml
 
 console:
   enabled: true

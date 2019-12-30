@@ -8,12 +8,7 @@ package main
 import (
     "log"
     "context"
-    // "strconv"
-    "strings"
     "time"
-
-    // "github.com/golang/protobuf/ptypes/timestamp"
-    // "github.com/satori/go.uuid"
 
     "github.com/spf13/afero"
 
@@ -81,148 +76,134 @@ func (g *Gun) Shoot(ammo core.Ammo) {
     g.shoot(customAmmo)
 }
 
-func (g *Gun) regular_scenario(client pb.AuthenticatorClient, ammo *Ammo) int {
-    // Create session
+func (g *Gun) login(client pb.AuthenticatorClient, ammo *Ammo) int {
+    // Prepare request
     credentials := pb.Credentials{
         UserName: ammo.Param1,
         Password: ammo.Param2,
     }
-    login_request := pb.LoginRequest{
+    cookie := pb.Cookie{
+        SessionId: ammo.Param3,
+    }
+    request := pb.LoginRequest{
         Credentials: &credentials,
+        Cookie: &cookie,
     }
-    clientDeadline := time.Now().Add(200 * time.Millisecond)
-    ctx, _ := context.WithDeadline(context.TODO(), clientDeadline)
-    login_response, err := client.Login(ctx, &login_request)
+
+    // Perform gRPC call
+    deadline := time.Now().Add(1000 * time.Millisecond)
+    ctx, _ := context.WithDeadline(context.TODO(), deadline)
+    response, err := client.Login(ctx, &request)
     if ctx.Err() == context.Canceled {
         return 503
     }
+
+    // Check return code
     if err != nil {
         if e, ok := status.FromError(err); ok {
             switch e.Code() {
-                case codes.InvalidArgument:
-                    return 403
                 case codes.DeadlineExceeded:
                     return 503
                 default:
+                    log.Printf("FATAL", err)
                     return 500
             }
         }
     }
-    cookie := login_response.GetCookie()
 
-    // Query resources
-    for _, resource := range strings.Split(ammo.Param3, ",") {
-        validation_request := pb.ValidationRequest{
-            Cookie: cookie,
-            Resource: resource,
-        }
-        clientDeadline = time.Now().Add(200 * time.Millisecond)
-        ctx, _ = context.WithDeadline(context.TODO(), clientDeadline)
-        validation_response, err := client.Validate(
-            ctx, &validation_request)
-        if ctx.Err() == context.Canceled {
-            return 503
-        }
-        if err != nil {
-            if e, ok := status.FromError(err); ok {
-                switch e.Code() {
-                    case codes.InvalidArgument:
-                        return 403
-                    case codes.DeadlineExceeded:
-                        return 503
-                    default:
-                        return 500
-                }
-            }
-        }
-        if (validation_response == nil) {
-            return 500
-        }
+    // Check response
+    if response == nil {
+        return 500
     }
-
-    // Remove session
-    logout_request := pb.LogoutRequest{
-        Cookie: cookie,
-    }
-    clientDeadline = time.Now().Add(200 * time.Millisecond)
-    ctx, _ = context.WithDeadline(context.TODO(), clientDeadline)
-    logout_response, err := client.Logout(ctx, &logout_request)
-    if ctx.Err() == context.Canceled {
-        return 503
-    }
-    if err != nil {
-        if e, ok := status.FromError(err); ok {
-            switch e.Code() {
-                case codes.InvalidArgument:
-                    return 403
-                case codes.DeadlineExceeded:
-                    return 503
-                default:
-                    return 500
-            }
-        }
-    }
-    if (logout_response == nil) {
+    if response.GetStatus().GetCode() == pb.Status_INTERNAL_ERROR {
         return 500
     }
 
     return 200
 }
 
-/*
-func (g *Gun) case2_method(client pb.AuthenticatorClient, ammo *Ammo) int {
-        code := 0
+func (g *Gun) logout(client pb.AuthenticatorClient, ammo *Ammo) int {
+    // Prepare request
+    cookie := pb.Cookie{
+        SessionId: ammo.Param1,
+    }
+    request := pb.LogoutRequest{
+        Cookie: &cookie,
+    }
 
-        var itemIDs []int64
-        for _, id := range strings.Split(ammo.Param1, ",") {
-                if id == "" {
-                        continue
-                }
-                itemID, err := strconv.ParseInt(id, 10, 64)
-                if err != nil {
-                        log.Printf("Ammo parse FATAL: %s", err)
-                        code = 314
-                }
-                itemIDs = append(itemIDs, itemID)
+    // Perform gRPC call
+    deadline := time.Now().Add(1000 * time.Millisecond)
+    ctx, _ := context.WithDeadline(context.TODO(), deadline)
+    response, err := client.Logout(ctx, &request)
+    if ctx.Err() == context.Canceled {
+        return 503
+    }
+
+    // Check return code
+    if err != nil {
+        if e, ok := status.FromError(err); ok {
+            switch e.Code() {
+                case codes.DeadlineExceeded:
+                    return 503
+                default:
+                    log.Printf("FATAL", err)
+                    return 500
+            }
         }
+    }
 
-        // prepare item_id and warehouse_id
-        item_id, err := strconv.ParseInt(ammo.Param1, 10, 0)
-        if err != nil {
-                log.Printf("Failed to parse ammo FATAL", err)
-                code = 314
-        }
-        warehouse_id, err2 := strconv.ParseInt(ammo.Param2, 10, 0)
-        if err2 != nil {
-                log.Printf("Failed to parse ammo FATAL", err2)
-                code = 314
-        }
+    // Check response
+    if response == nil {
+        return 500
+    }
+    if response.GetStatus().GetCode() == pb.Status_INTERNAL_ERROR {
+        return 500
+    }
 
-        items := []*pb.SomeItem{}
-        items = append(items, &pb.SomeItem{
-                item_id,
-                warehouse_id,
-                1,
-                &timestamp.Timestamp{time.Now().Unix(), 111}
-        })
-
-        out2, err3 := client.GetSomeDataSecond(
-                context.TODO(), &pb.SomeRequest{
-                        uuid.Must(uuid.NewV4()).String(),
-                        1,
-                        items})
-        if err3 != nil {
-                log.Printf("FATAL", err3)
-                code = 316
-        }
-
-        if out2 != nil {
-                code = 200
-        }
-
-        return code
+    return 200
 }
-*/
+
+func (g *Gun) validate(client pb.AuthenticatorClient, ammo *Ammo) int {
+    // Prepare request
+    cookie := pb.Cookie{
+        SessionId: ammo.Param1,
+    }
+    request := pb.ValidationRequest{
+        Cookie: &cookie,
+        Resource: ammo.Param2,
+    }
+
+    // Perform gRPC call
+    deadline := time.Now().Add(1000 * time.Millisecond)
+    ctx, _ := context.WithDeadline(context.TODO(), deadline)
+    response, err := client.Validate(ctx, &request)
+    if ctx.Err() == context.Canceled {
+        return 503
+    }
+
+    // Check return code
+    if err != nil {
+        if e, ok := status.FromError(err); ok {
+            switch e.Code() {
+                case codes.DeadlineExceeded:
+                    return 503
+                default:
+                    log.Printf("FATAL", err)
+                    return 500
+            }
+        }
+    }
+
+    // Check response
+    if response == nil {
+        return 500
+    }
+    if response.GetStatus().GetCode() == pb.Status_INTERNAL_ERROR {
+        return 500
+    }
+
+    return 200
+}
 
 func (g *Gun) shoot(ammo *Ammo) {
     code := 0
@@ -232,8 +213,12 @@ func (g *Gun) shoot(ammo *Ammo) {
     client := pb.NewAuthenticatorClient(&conn)
 
     switch ammo.Tag {
-        case "no_queries":
-            code = g.regular_scenario(client, ammo)
+        case "Login":
+            code = g.login(client, ammo)
+        case "Logout":
+            code = g.logout(client, ammo)
+        case "Validate":
+            code = g.validate(client, ammo)
         default:
             code = 404
     }

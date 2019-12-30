@@ -20,6 +20,7 @@ console:
 telegraf:
   enabled: true
   package: yandextank.plugins.Telegraf
+  default_target: 172.17.234.10
 
 uploader:
   enabled: false

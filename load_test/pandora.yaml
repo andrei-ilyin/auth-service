@@ -1,7 +1,7 @@
 pools:
   - gun:
       type: grpc_gun # gun name at `register.Gun("my_custom_gun_name", ...`)
-      target: "127.0.0.1:50051"
+      target: "172.17.234.10:50051"
 
     ammo:
       type: custom_provider
@@ -14,17 +14,19 @@ pools:
       destination: ./phout.log
 
     rps:
-      - {duration: 20s, type: line,  from: 1, to: 500}
-      - {duration: 60s, type: const,  ops: 500}
+      - {duration: 30s, type: line,  from: 1, to: 8000}
+      - {duration: 60s, type: const,  ops: 8000}
 
     startup:
       type: once
-      times: 15
+      times: 10
 
 log:
   level: info
 
 monitoring:
+  expvar:
+    enabled: true
   cpuprofile:
     enabled: true
   memprofile:
